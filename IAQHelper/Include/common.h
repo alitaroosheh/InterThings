@@ -51,7 +51,7 @@ extern "C" {
  *  @retval 0 -> Success
  *  @retval < 0 -> Failure Info
  */
-int8_t bme68x_interface_init(struct bme68x_dev *bme, uint8_t intf);
+int8_t bme68x_interface_init(struct bme68x_dev *bme, uint8_t devAddress, uint8_t intf);
 
 /*!
  *  @brief Function for reading the sensor's registers through I2C bus.

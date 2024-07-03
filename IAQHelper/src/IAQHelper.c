@@ -93,8 +93,6 @@ void CalculateIndoorAirQuality(float currentHumidity)
 
     CalculateIAQ(air_qualityScore);
     printf("Air Quality = %.3f\r\n", air_qualityScore);
-    printf("humidityidity score: %.3f\r\n", humidityScore/100);
-    printf("Gas score was : %.3f\r\n", gasScore/100);
 
 }
 
@@ -123,7 +121,13 @@ void IAQTask(void *parameters /*loopInterval in ms*/)
      * For I2C : BME68X_I2C_INTF
      * For SPI : BME68X_SPI_INTF
      */
-    rslt = bme68x_interface_init(&bme, BME68X_I2C_INTF);
+    uint8_t devAddress;
+#if defined(CONFIG_EXAMPLE_I2C_ADDRESS_0)
+    devAddress = BME68X_I2C_ADDR_LOW;
+#elif defined(CONFIG_EXAMPLE_I2C_ADDRESS_1)
+    devAddress = BME68X_I2C_ADDR_HIGH;
+#endif
+    rslt = bme68x_interface_init(&bme, devAddress, BME68X_I2C_INTF);
     bme68x_check_rslt("bme68x_interface_init", rslt);
 
     rslt = bme68x_init(&bme);

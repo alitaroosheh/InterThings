@@ -106,7 +106,7 @@ static esp_err_t i2c_master_init(void)
     return ESP_OK;
 }
 
-int8_t bme68x_interface_init(struct bme68x_dev *bme, uint8_t intf)
+int8_t bme68x_interface_init(struct bme68x_dev *bme, uint8_t devAddress, uint8_t intf)
 {
     int8_t rslt = BME68X_OK;
 
@@ -115,7 +115,7 @@ int8_t bme68x_interface_init(struct bme68x_dev *bme, uint8_t intf)
         /* Bus configuration : I2C */
         if (intf == BME68X_I2C_INTF)
         {
-            dev_addr = BME68X_I2C_ADDR_HIGH;
+            dev_addr = devAddress;
             bme->read = bme68x_i2c_read;
             bme->write = bme68x_i2c_write;
             bme->intf = BME68X_I2C_INTF;
