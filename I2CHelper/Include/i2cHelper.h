@@ -1,5 +1,5 @@
 /**
- * @file i2cHelper.h
+ * @file I2CHelper.h
  * @author Ali Taroosheh (ali.taroosheh@gmail.com)
  * @brief 
  * @version 0.1

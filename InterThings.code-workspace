@@ -9,13 +9,24 @@
 			"path": "I2CHelper"
 		},
 		{
+			"name": "IAQ Example",
+			"path": "IAQHelper/Examples"
+		},
+		{
+			"name": "IAQHelper",
+			"path": "IAQHelper"
+		},
+		{
 
 			"path": "."
 		}
 	],
 	"settings": {
 		"files.associations": {
-			"cstdint": "c"
+			"cstdint": "c",
+			"iaqhelper.h": "c",
+			"common.h": "c",
+			"i2chelper.h": "c"
 		}
 	}
 }

@@ -1,0 +1,9 @@
+dependencies:
+  idf:
+    version: '>=5.1'
+description: IAQHelper helps to drive BME680 easily by means of I2C
+repository: https://github.com/alitaroosheh/InterThings.git
+repository_info:
+  path: IAQHelper
+url: https://github.com/alitaroosheh/InterThings/tree/master/IAQHelper
+version: 1.0.0

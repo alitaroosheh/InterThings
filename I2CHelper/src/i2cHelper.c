@@ -1,5 +1,5 @@
 /**
- * @file i2cHelper.c
+ * @file I2CHelper.c
  * @author Ali Taroosheh (ali.taroosheh@gmail.com)
  * @brief 
  * @version 0.1
@@ -8,7 +8,7 @@
  * 
  */
 
-#include "i2cHelper.h"
+#include "I2CHelper.h"
 
 #define I2C_MASTER_TX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
 #define I2C_MASTER_RX_BUF_DISABLE 0 /*!< I2C master doesn't need buffer */
@@ -19,7 +19,7 @@
 #define ACK_VAL 0x0                 /*!< I2C ack value */
 #define NACK_VAL 0x1                /*!< I2C nack value */
 
-static const char *TAG = "i2cHelper";
+static const char *TAG = "I2CHelper";
 
 
 static struct {

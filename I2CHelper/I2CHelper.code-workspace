@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "I2CHelper Example",
+			"path": "I2CHelper/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}

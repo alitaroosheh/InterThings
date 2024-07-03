@@ -1,0 +1,7 @@
+dependencies:
+  # Define local dependency with relative path
+  IAQHelper:
+    path: ../../
+  I2CHelper:
+    path: I2CHelper
+    git: https://github.com/alitaroosheh/InterThings.git
