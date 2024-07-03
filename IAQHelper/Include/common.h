@@ -18,7 +18,7 @@ extern "C" {
 #include "esp_log.h"
 #include "bme68x.h"
 #include "driver/i2c.h"
-#include "i2cHelper.h"
+#include "I2CHelper.h"
 
 
 #define I2C_MASTER_SCL_IO           CONFIG_EXAMPLE_I2C_MASTER_SCL       /*!< GPIO number used for I2C master clock */
