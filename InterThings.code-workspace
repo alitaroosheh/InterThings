@@ -1,6 +1,10 @@
 {
 	"folders": [
 		{
+			"name": "I2CHelper Example",
+			"path": "I2CHelper/Examples"
+		},
+		{
 			"name": "I2CHelper",
 			"path": "I2CHelper"
 		},
@@ -9,5 +13,9 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
 }

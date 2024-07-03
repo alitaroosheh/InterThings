@@ -1,0 +1,10 @@
+# dependencies:
+  # # Define a dependency from a GitHub repository
+  # test_component:
+  #   path: I2CHelper
+  #   git: https://github.com/alitaroosheh/InterThings.git
+
+dependencies:
+  # Define local dependency with relative path
+  I2CHelper:
+    path: ../../
