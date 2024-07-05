@@ -1,0 +1,9 @@
+dependencies:
+  idf:
+    version: '>=5.1'
+description: WiFiHelper helps to drive WiFi easily by means of ESP-IDF APIs
+repository: https://github.com/alitaroosheh/InterThings.git
+repository_info:
+  path: WiFiHelper
+url: https://github.com/alitaroosheh/InterThings/tree/master/WiFiHelper
+version: 1.0.0

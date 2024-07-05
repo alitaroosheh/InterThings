@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "WiFiHelper Example",
+			"path": "WiFiHelper/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}

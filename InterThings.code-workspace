@@ -17,6 +17,14 @@
 			"path": "IAQHelper"
 		},
 		{
+			"name": "WiFi Example",
+			"path": "WiFiHelper/Examples"
+		},
+		{
+			"name": "WiFiHelper",
+			"path": "WiFiHelper"
+		},
+		{
 
 			"path": "."
 		}
@@ -26,7 +34,10 @@
 			"cstdint": "c",
 			"iaqhelper.h": "c",
 			"common.h": "c",
-			"i2chelper.h": "c"
+			"i2chelper.h": "c",
+			"wifihelper.h": "c",
+			"esp_event.h": "c",
+			"string.h": "c"
 		}
 	}
 }
