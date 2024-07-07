@@ -1,0 +1,9 @@
+dependencies:
+  idf:
+    version: '>=5.1'
+description: NVSHelper helps to drive NVS easily by means of ESP-IDF APIs
+repository: https://github.com/alitaroosheh/InterThings.git
+repository_info:
+  path: NVSHelper
+url: https://github.com/alitaroosheh/InterThings/tree/master/NVSHelper
+version: 1.0.0

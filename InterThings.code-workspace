@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "I2CHelper Example",
+			"name": "I2C Example",
 			"path": "I2CHelper/Examples"
 		},
 		{
@@ -25,6 +25,14 @@
 			"path": "WiFiHelper"
 		},
 		{
+			"name": "NVS Example",
+			"path": "NVSHelper/Examples"
+		},
+		{
+			"name": "NVSHelper",
+			"path": "NVSHelper"
+		},
+		{
 
 			"path": "."
 		}
@@ -37,7 +45,18 @@
 			"i2chelper.h": "c",
 			"wifihelper.h": "c",
 			"esp_event.h": "c",
-			"string.h": "c"
+			"string.h": "c",
+			"esp_wifi.h": "c",
+			"esp_system.h": "c",
+			"format": "c",
+			"regex": "c",
+			"xlocale": "c",
+			"xstring": "c",
+			"bitset": "c",
+			"string_view": "c",
+			"cassert": "cpp",
+			"esp_log.h": "c",
+			"nvs_flash.h": "c"
 		}
 	}
 }

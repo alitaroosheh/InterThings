@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "NVSHelper Example",
+			"path": "NVSHelper/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}
