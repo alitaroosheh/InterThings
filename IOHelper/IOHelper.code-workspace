@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "IOHelper Example",
+			"path": "IOHelper/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}

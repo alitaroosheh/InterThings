@@ -15,7 +15,7 @@ void app_main(void)
     ESP_LOGI(TAG, "Indoor Air Quality Sensor...");
     uint32_t loopInterval = 5000;
     xTaskCreate(&IAQTask, "IAQTask", configMINIMAL_STACK_SIZE * 2, (void*)&loopInterval, 5, NULL);
-        while(true)
+    while(true)
     {    
         vTaskDelay(10000 / portTICK_PERIOD_MS);
     }

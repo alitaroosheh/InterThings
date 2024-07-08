@@ -33,6 +33,14 @@
 			"path": "NVSHelper"
 		},
 		{
+			"name": "IO Example",
+			"path": "IOHelper/Examples"
+		},
+		{
+			"name": "IOHelper",
+			"path": "IOHelper"
+		},
+		{
 
 			"path": "."
 		}
@@ -56,7 +64,13 @@
 			"string_view": "c",
 			"cassert": "cpp",
 			"esp_log.h": "c",
-			"nvs_flash.h": "c"
+			"nvs_flash.h": "c",
+			"memory": "c",
+			"mutex": "c",
+			"chrono": "c",
+			"functional": "c",
+			"compare": "c",
+			"task.h": "c"
 		}
 	}
 }

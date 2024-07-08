@@ -1,4 +1,4 @@
-# _IAQ Example project_
+# _NVS Example project_
 
-In this project you could find how to use IAQHelper library to drive BME680 sensor.
+In this project you could find how to use NVSHelper library to drive NVS.
 
