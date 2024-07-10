@@ -70,7 +70,8 @@
 			"chrono": "c",
 			"functional": "c",
 			"compare": "c",
-			"task.h": "c"
+			"task.h": "c",
+			"queue.h": "c"
 		}
 	}
 }

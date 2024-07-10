@@ -9,14 +9,14 @@
 #define TAG "IOHelper_example"
 
 #define IOPIN1 4
-#define IOPIN2 5
+#define IOPIN2 0
 
 static void ioTask(void* arg)
 {
     uint32_t pin;
     for (;;) {
         if (xQueueReceive(IoEventQueue, &pin, portMAX_DELAY)) {
-            printf("GPIO[%"PRIu32"] intr, val: %d\n", pin, gpio_get_level(pin));
+            printf("GPIO[%"PRIu32"] intr, val: %d\n", pin, IoReadPin(pin));
         }
     }
 }
@@ -24,31 +24,15 @@ static void ioTask(void* arg)
 void app_main()
 {
 
+    ESP_LOGI(TAG, "IO helper application is running...\n");
 	IoConfig(IOPIN1, GPIO_MODE_OUTPUT, 0, 0);
-	IoConfig(IOPIN2, GPIO_MODE_OUTPUT, 0, 0);
-
-	IoReset(IOPIN1);
-	IoReset(IOPIN2);
-	vTaskDelay(10000 / portTICK_PERIOD_MS);
+	IoConfigIsr (IOPIN2, 1, 0, GPIO_INTR_ANYEDGE);
+	
+    xTaskCreate(ioTask, "ioTask", 2048, NULL, 10, NULL);
 
 	while(1)
 	{
 		IoToggle(IOPIN1);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-		IoToggle(IOPIN1);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-		IoToggle(IOPIN1);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-		IoReset(IOPIN1);
-		vTaskDelay(5000 / portTICK_PERIOD_MS);
-
-		IoToggle(IOPIN2);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-		IoToggle(IOPIN2);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-		IoToggle(IOPIN2);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-		IoToggle(IOPIN2);
 		vTaskDelay(5000 / portTICK_PERIOD_MS);
 	}
 
