@@ -166,10 +166,8 @@ esp_err_t ioToggle(gpio_num_t pin)
 {
 
 	esp_err_t result;
-	ESP_LOGI(TAG, "current IO %d value is %d", pin, gpio_get_level(pin));
 	takeMutex(io_mutex);
 	ESP_ERROR_CHECK(result = gpio_set_level(pin, (gpio_get_level(pin) == 0) ? 1:0));
-	ESP_LOGI(TAG, "Now IO %d is %d", pin, gpio_get_level(pin));
 	giveMutex(io_mutex);
 	return result;
 
