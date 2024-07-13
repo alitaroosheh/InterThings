@@ -1,0 +1,8 @@
+dependencies:
+  idf: '>=5.1'
+description: MQTTHelper helps to publis and subscribe over MQTT easily by means of ESP-IDF APIs
+repository: https://github.com/alitaroosheh/InterThings.git
+repository_info:
+  path: MQTTHelper
+url: https://github.com/alitaroosheh/InterThings/tree/master/MQTTHelper
+version: 1.0.0

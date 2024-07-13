@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "MQTT Example",
+			"path": "MQTTHelper/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}
