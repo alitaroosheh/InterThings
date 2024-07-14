@@ -16,6 +16,8 @@
 #include "freertos/event_groups.h"
 #include <string.h>
 
+#include "WiFiHelper.h"
+
 #define TAG "MQTTHelper_example"
 
 
@@ -263,13 +265,22 @@ void app_main()
 
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    //ESP_ERROR_CHECK(esp_event_loop_create_default());
+	WiFiInit();
 
     /* This helper function configures Wi-Fi or Ethernet, as selected in menuconfig.
      * Read "Establishing Wi-Fi or Ethernet Connection" section in
      * examples/protocols/README.md for more information about this function.
      */
-    ESP_ERROR_CHECK(example_connect());
+    //ESP_ERROR_CHECK(example_connect());
+
+    ESP_LOGW(TAG, "Start STA Mode");
+
+	wifi_config_t wifiConfigSTA = { 0 };
+	strcpy((char *)wifiConfigSTA.sta.ssid, "IoTWiFi");
+	strcpy((char *)wifiConfigSTA.sta.password, "alitaroosheh1234");
+
+	WiFiStartSTA(wifiConfigSTA, 5*1000);
 
     mqtt5_app_start();
 

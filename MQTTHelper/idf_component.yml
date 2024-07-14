@@ -1,7 +1,10 @@
 dependencies:
   idf: '>=5.1'
-  protocol_examples_common:
-    path: ${IDF_PATH}/examples/common_components/protocol_examples_common
+  WiFiHelper:
+    path: WiFiHelper
+    git: https://github.com/alitaroosheh/InterThings.git
+  # protocol_examples_common:
+  #   path: ${IDF_PATH}/examples/common_components/protocol_examples_common
 description: MQTTHelper helps to publis and subscribe over MQTT easily by means of ESP-IDF APIs
 repository: https://github.com/alitaroosheh/InterThings.git
 repository_info:
