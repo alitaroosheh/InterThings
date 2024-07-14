@@ -24,6 +24,7 @@ esp_err_t                                wifiInit                               
 esp_err_t                                wifiStartAP                                (wifi_config_t config);
 esp_err_t                                wifiStartSTA                               (wifi_config_t config, uint32_t timeout);
 esp_err_t                                wifiStartAPSTA                             (wifi_config_t configAP, wifi_config_t configSTA, uint32_t timeout);
-esp_err_t                                WiFiGetMode                                (wifi_mode_t *mode);
+esp_err_t                                wiFiGetMode                                (wifi_mode_t *mode);
 esp_err_t                                wifiStop                                   ();
+bool                                     wifiIsConnectedSTA                         ();
 

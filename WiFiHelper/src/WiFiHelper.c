@@ -16,22 +16,33 @@
 
 static EventGroupHandle_t wifiEventGroup;
 const int CONNECTED_BIT = BIT0;
+static bool isConnectedSTA = false;
 
 
 static void event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
 {
-	if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
+	if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
+	{
+		isConnectedSTA = false;
 		ESP_LOGI(TAG, "WIFI_EVENT_STA_DISCONNECTED");
 		esp_wifi_connect();
 		xEventGroupClearBits(wifiEventGroup, CONNECTED_BIT);
-	} else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
+	}
+	else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP)
+	{
+		isConnectedSTA = true;
 		ESP_LOGI(TAG, "IP_EVENT_STA_GOT_IP");
 		xEventGroupSetBits(wifiEventGroup, CONNECTED_BIT);
 	}
 }
 
+bool wifiIsConnectedSTA()
+{
+	return isConnectedSTA;
+}
 
-esp_err_t WiFiGetMode(wifi_mode_t *mode)
+
+esp_err_t wiFiGetMode(wifi_mode_t *mode)
 {
 	return esp_wifi_get_mode(mode);
 }
