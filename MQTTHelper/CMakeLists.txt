@@ -5,4 +5,4 @@ set(srcs "src/MQTTHelper.c")
 
 idf_component_register(SRCS ${srcs}
                        INCLUDE_DIRS "include"
-                       REQUIRES "driver" "log" "freertos" "esp_event" "esp_system")
+                       REQUIRES "driver" "log" "freertos" "esp_event" "esp_system" "nvs_flash" "esp_netif" "mqtt")

@@ -41,6 +41,14 @@
 			"path": "IOHelper"
 		},
 		{
+			"name": "MQTT Example",
+			"path": "MQTTHelper/Examples"
+		},
+		{
+			"name": "MQTTHelper",
+			"path": "MQTTHelper"
+		},
+		{
 
 			"path": "."
 		}
@@ -100,7 +108,8 @@
 			"unordered_map": "c",
 			"algorithm": "c",
 			"iterator": "c",
-			"iohelper.h": "c"
+			"iohelper.h": "c",
+			"freertos.h": "c"
 		}
 	}
 }
