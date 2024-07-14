@@ -16,7 +16,7 @@ void app_main()
 	}
 	ESP_ERROR_CHECK(err);
 
-	WiFiInit();
+	wifiInit();
 
 #if CONFIG_WIFI_CONNECT_AP
 	ESP_LOGW(TAG, "Start AP Mode");
@@ -31,7 +31,7 @@ void app_main()
 	if (strlen(CONFIG_AP_WIFI_PASSWORD) == 0) {
 		wifiConfigAP.ap.authmode = WIFI_AUTH_OPEN;
 	}
-	WiFiStartAP(wifiConfigAP);
+	wifiStartAP(wifiConfigAP);
 #elif CONFIG_WIFI_CONNECT_STA
 	ESP_LOGW(TAG, "Start STA Mode");
 
@@ -39,7 +39,7 @@ void app_main()
 	strcpy((char *)wifiConfigSTA.sta.ssid, CONFIG_STA_WIFI_SSID);
 	strcpy((char *)wifiConfigSTA.sta.password, CONFIG_STA_WIFI_PASSWORD);
 
-	WiFiStartSTA(wifiConfigSTA, CONFIG_STA_CONNECT_TIMEOUT*1000);
+	wifiStartSTA(wifiConfigSTA, CONFIG_STA_CONNECT_TIMEOUT*1000);
 #elif CONFIG_WIFI_CONNECT_APSTA
 	ESP_LOGW(TAG, "Start APSTA Mode");
 
@@ -59,6 +59,6 @@ void app_main()
 	strcpy((char *)sta_config.sta.ssid, CONFIG_STA_WIFI_SSID);
 	strcpy((char *)sta_config.sta.password, CONFIG_STA_WIFI_PASSWORD);
 
-	WiFiStartAPSTA(ap_config, sta_config, CONFIG_STA_CONNECT_TIMEOUT*1000);
+	wifiStartAPSTA(ap_config, sta_config, CONFIG_STA_CONNECT_TIMEOUT*1000);
 #endif
 }

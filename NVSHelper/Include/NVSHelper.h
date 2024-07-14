@@ -16,7 +16,7 @@
 #include "nvs_flash.h"
 
 /**
- * @brief NvsSave: to save a key value data in NVS.
+ * @brief nvsSave: to save a key value data in NVS.
  * 
  * @param namespace namespace_name in NVS
  * @param key the key array
@@ -24,10 +24,10 @@
  * @param length the length of value
  * @return esp_err_t equals ESP_OK when successful
  */
-esp_err_t                                NvsSave                                        (const char *namespace, const char *key, const char *value, size_t length);
+esp_err_t                                nvsSave                                        (const char *namespace, const char *key, const char *value, size_t length);
 
 /**
- * @brief NvsLoad: to load a key value from VNS.
+ * @brief nvsLoad: to load a key value from VNS.
  * 
  * @param namespace namespace_name in NVS
  * @param key the key array
@@ -35,22 +35,22 @@ esp_err_t                                NvsSave                                
  * @param length the length of value
  * @return esp_err_t equals ESP_OK when successful
  */
-esp_err_t                                NvsLoad                                        (const char *namespace, const char *key, char *value, size_t *length);
+esp_err_t                                nvsLoad                                        (const char *namespace, const char *key, char *value, size_t *length);
 
 /**
- * @brief NvsDeleteKey: delete a key value in a namespace from NVS
+ * @brief nvsDeleteKey: delete a key value in a namespace from NVS
  * 
  * @param namespace namespace_name in NVS
  * @param key the key array
  * @return esp_err_t equals ESP_OK when successful
  */
-esp_err_t                                NvsDeleteKey                                  (const char *namespace, const char *key);
+esp_err_t                                nvsDeleteKey                                  (const char *namespace, const char *key);
 
 /**
- * @brief NvsDelete: delete a namespace from NVS
+ * @brief nvsDelete: delete a namespace from NVS
  * 
  * @param namespace namespace_name in NVS
  * @return esp_err_t equals ESP_OK when successful
  */
-esp_err_t                                NvsDelete                                      (const char *namespace);
+esp_err_t                                nvsDelete                                      (const char *namespace);
 

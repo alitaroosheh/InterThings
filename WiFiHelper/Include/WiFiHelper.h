@@ -20,10 +20,10 @@
 #include "esp_log.h"
 #include "nvs_flash.h"
 
-esp_err_t                                WiFiInit                                   (void);
-esp_err_t                                WiFiStartAP                                (wifi_config_t config);
-esp_err_t                                WiFiStartSTA                               (wifi_config_t config, uint32_t timeout);
-esp_err_t                                WiFiStartAPSTA                             (wifi_config_t configAP, wifi_config_t configSTA, uint32_t timeout);
+esp_err_t                                wifiInit                                   (void);
+esp_err_t                                wifiStartAP                                (wifi_config_t config);
+esp_err_t                                wifiStartSTA                               (wifi_config_t config, uint32_t timeout);
+esp_err_t                                wifiStartAPSTA                             (wifi_config_t configAP, wifi_config_t configSTA, uint32_t timeout);
 esp_err_t                                WiFiGetMode                                (wifi_mode_t *mode);
-esp_err_t                                WiFiStop                                   ();
+esp_err_t                                wifiStop                                   ();
 

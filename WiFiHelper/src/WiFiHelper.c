@@ -37,12 +37,12 @@ esp_err_t WiFiGetMode(wifi_mode_t *mode)
 }
 
 
-esp_err_t WiFiStop()
+esp_err_t wifiStop()
 {
 	return esp_wifi_deinit();
 }
 
-esp_err_t WiFiInit(void)
+esp_err_t wifiInit(void)
 {
 	static bool initialized = false;
 	esp_err_t ret;
@@ -70,7 +70,7 @@ esp_err_t WiFiInit(void)
 }
 
 
-esp_err_t WiFiStartAP(wifi_config_t config)
+esp_err_t wifiStartAP(wifi_config_t config)
 {
 	esp_err_t ret;
 	ESP_ERROR_CHECK( ret = esp_wifi_set_mode(WIFI_MODE_AP) );
@@ -82,7 +82,7 @@ esp_err_t WiFiStartAP(wifi_config_t config)
 }
 
 
-esp_err_t WiFiStartSTA(wifi_config_t config, uint32_t timeout_ms)
+esp_err_t wifiStartSTA(wifi_config_t config, uint32_t timeout_ms)
 {
 
 	esp_err_t ret;
@@ -110,7 +110,7 @@ esp_err_t WiFiStartSTA(wifi_config_t config, uint32_t timeout_ms)
 }
 
 
-esp_err_t WiFiStartAPSTA(wifi_config_t configAP, wifi_config_t configSTA, uint32_t timeout)
+esp_err_t wifiStartAPSTA(wifi_config_t configAP, wifi_config_t configSTA, uint32_t timeout)
 {
 
 	esp_err_t ret;

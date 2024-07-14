@@ -265,8 +265,7 @@ void app_main()
 
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_netif_init());
-    //ESP_ERROR_CHECK(esp_event_loop_create_default());
-	WiFiInit();
+	wifiInit();
 
     /* This helper function configures Wi-Fi or Ethernet, as selected in menuconfig.
      * Read "Establishing Wi-Fi or Ethernet Connection" section in
@@ -280,7 +279,7 @@ void app_main()
 	strcpy((char *)wifiConfigSTA.sta.ssid, "IoTWiFi");
 	strcpy((char *)wifiConfigSTA.sta.password, "alitaroosheh1234");
 
-	WiFiStartSTA(wifiConfigSTA, 5*1000);
+	wifiStartSTA(wifiConfigSTA, 5*1000);
 
     mqtt5_app_start();
 

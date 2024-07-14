@@ -22,11 +22,10 @@
 #include "esp_log.h"
 #include "nvs_flash.h"
 
-float                       Altitude                                (const int32_t press, const float seaLevel);
-void                        CalculateIAQ                            (float score);
-void                        GetGasReference                         (float gas);
-void                        CalculateIndoorAirQuality               (float currentHumidityidity);
-void                        IAQTask                                 (void *parameters);
+float                       iaqAltitude                                (const int32_t press, const float seaLevel);
+void                        iaqGetGasReference                         (float gas);
+void                        iaqCalculateIndoorAirQuality               (float currentHumidityidity);
+void                        iaqTask                                    (void *parameters);
 
 
 

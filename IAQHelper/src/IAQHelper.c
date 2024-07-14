@@ -20,21 +20,21 @@ static float gasReference = 250000;
 static float humidityReference = 40;
 
 
-/// @brief Altitude: calculate altitude by means of preasure seaLevel default is 1013.25hPa
+/// @brief iaqAltitude: calculate altitude by means of preasure seaLevel default is 1013.25hPa
 /// @param press 
 /// @param seaLevel 
-/// @return float Altitude in Meter
-float Altitude(const int32_t press, const float seaLevel)
+/// @return float iaqAltitude in Meter
+float iaqAltitude(const int32_t press, const float seaLevel)
 {
 
-  static float Altitude;
-  Altitude = 44330.0 * (1.0 - pow(((float)press / 100.0) / seaLevel, 0.1903));
-  return (Altitude);
+  static float iaqAltitude;
+  iaqAltitude = 44330.0 * (1.0 - pow(((float)press / 100.0) / seaLevel, 0.1903));
+  return (iaqAltitude);
 }
 
-/// @brief CalculateIAQ: translate the IAQ to a meaningful sentence
+/// @brief iaqCalculateAirQuality: translate the IAQ to a meaningful sentence
 /// @param score 
-void CalculateIAQ(float score)
+static void iaqCalculateAirQuality(float score)
 {
   printf("Air quality is ");
   score = (100-score)*5;
@@ -46,9 +46,9 @@ void CalculateIAQ(float score)
   else if (score >=  00 && score <=  50 ) printf("Good\r\n");
 }
 
-/// @brief GetGasReference: make an avarage from incoming gas levels, each 10 sample will gather and get avarage. gasReference is the avarage result.
+/// @brief iaqGetGasReference: make an avarage from incoming gas levels, each 10 sample will gather and get avarage. gasReference is the avarage result.
 /// @param gas 
-void GetGasReference(float gas)
+void iaqGetGasReference(float gas)
 {
     // Now run the sensor for a burn-in period, then use combination of relative humidity and gas resistance to estimate indoor air quality as a percentage.
 
@@ -64,9 +64,9 @@ void GetGasReference(float gas)
     }
 }
 
-/// @brief CalculateIndoorAirQuality: to get the AIQ value by means of humidity value.
+/// @brief iaqCalculateIndoorAirQuality: to get the AIQ value by means of humidity value.
 /// @param currentHumidity
-void CalculateIndoorAirQuality(float currentHumidity)
+void iaqCalculateIndoorAirQuality(float currentHumidity)
 {
     
     if (currentHumidity >= 38 && currentHumidity <= 42)
@@ -91,15 +91,15 @@ void CalculateIndoorAirQuality(float currentHumidity)
     //Combine results for the final IAQ index value (0-100% where 100% is good quality air)
     float air_qualityScore = humidityScore + gasScore;
 
-    CalculateIAQ(air_qualityScore);
+    iaqCalculateAirQuality(air_qualityScore);
     printf("Air Quality = %.3f\r\n", air_qualityScore);
 
 }
 
 
-/// @brief IAQTask: this is a task to pull the Humidity, Temprature, Pressure, Altitude and Air Quality values in a sequence.
+/// @brief iaqTask: this is a task to pull the Humidity, Temprature, Pressure, iaqAltitude and Air Quality values in a sequence.
 /// @param parameters 
-void IAQTask(void *parameters /*loopInterval in ms*/)
+void iaqTask(void *parameters /*loopInterval in ms*/)
 {
     uint32_t loopInterval = *((uint32_t*)parameters);
     struct bme68x_dev bme;
@@ -176,9 +176,9 @@ void IAQTask(void *parameters /*loopInterval in ms*/)
             printf("Pressure(Pa): %.3f\r\n", data[i].pressure);
             printf("humidity(%%): %.3f\r\n", data[i].humidity);
             printf("Gas resistance(ohm): %.3f\r\n", data[i].gas_resistance);
-            printf("Altitud: %.3f\r\n", Altitude(data[i].pressure, 1013.25));
-            GetGasReference(data[i].gas_resistance);
-            CalculateIndoorAirQuality(data[i].humidity);
+            printf("Altitud: %.3f\r\n", iaqAltitude(data[i].pressure, 1013.25));
+            iaqGetGasReference(data[i].gas_resistance);
+            iaqCalculateIndoorAirQuality(data[i].humidity);
             printf("\r\n*********************\r\n\r\n\r\n");
             sample_count++;
         }

@@ -24,7 +24,7 @@ void app_main()
 	size_t length2 = sizeof(value2);
 
 
-	err = NvsLoad("namespace", "Key1", value1, &length1);
+	err = nvsLoad("namespace", "Key1", value1, &length1);
 	if(err == ESP_OK)
 	{
 		ESP_LOGW(TAG, "***namespace Key1 is exist and this is the value:%s and length: %zu", value1, length1);
@@ -33,7 +33,7 @@ void app_main()
 	{
 		ESP_LOGW(TAG, "***namespace error %d", err);
 	}
-	err = NvsLoad("namespace", "Key2", value2, &length2);
+	err = nvsLoad("namespace", "Key2", value2, &length2);
 	if(err == ESP_OK)
 	{
 		ESP_LOGW(TAG, "***namespace Key2 is exist and this is the value:%s and length: %zu", value2, length2);
@@ -45,28 +45,28 @@ void app_main()
 
 
 
-	if(NvsLoad("namespace", "Key1", value1, &length1) == ESP_OK)
+	if(nvsLoad("namespace", "Key1", value1, &length1) == ESP_OK)
 	{
 		ESP_LOGI(TAG, "namespace Key1 is exist and this is the value:%s and length: %zu", value1, length1);
 	}
 	else
 	{
 		strcpy(value1, "this is the key1 value");
-		if(NvsSave("namespace", "Key1", value1, sizeof(value1)) == ESP_OK)
+		if(nvsSave("namespace", "Key1", value1, sizeof(value1)) == ESP_OK)
 		{
 			ESP_LOGI(TAG, "namespace Key1 is saved successfuly on NVS");
 		}
 	}
 
-	if(NvsLoad("namespace", "Key2", value2, &length2) == ESP_OK)
+	if(nvsLoad("namespace", "Key2", value2, &length2) == ESP_OK)
 	{
 		ESP_LOGI(TAG, "namespace Key2 is exist and this is the value:%s and length: %zu", value2, length2);
-		//NvsDeleteKey("namespace", "Key2");
+		//nvsDeleteKey("namespace", "Key2");
 	}
 	else
 	{
 		strcpy(value2, "this is the Key2 value");
-		if(NvsSave("namespace", "Key2", value2, sizeof(value2)) == ESP_OK)
+		if(nvsSave("namespace", "Key2", value2, sizeof(value2)) == ESP_OK)
 		{
 			ESP_LOGI(TAG, "Key2 does not exist, therefore namespace Key2 is saved successfuly on NVS");
 		}

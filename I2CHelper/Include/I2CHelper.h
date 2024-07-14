@@ -19,7 +19,7 @@
 
 
 
-void i2cConfig(i2c_port_t port, uint32_t frequency, uint8_t sda, uint8_t scl);
-esp_err_t i2cGet(uint8_t chip_address, uint8_t register_address, uint8_t *data, uint32_t data_length);
-esp_err_t i2cSend (uint8_t chip_address, uint8_t register_address, const uint8_t *data, uint32_t data_length);
+void                    i2cConfig           (i2c_port_t port, uint32_t frequency, uint8_t sda, uint8_t scl);
+esp_err_t               i2cGet              (uint8_t chip_address, uint8_t register_address, uint8_t *data, uint32_t data_length);
+esp_err_t               i2cSend             (uint8_t chip_address, uint8_t register_address, const uint8_t *data, uint32_t data_length);
 
