@@ -20,7 +20,8 @@
 
 #define TAG "MQTTHelper_example"
 
-
+static esp_mqtt_client_config_t mqttConfig;
+static esp_mqtt_client_handle_t client;
 
 static void log_error_if_nonzero(const char *message, int error_code)
 {
@@ -91,7 +92,7 @@ static void print_user_property(mqtt5_user_property_handle_t user_property)
     }
 }
 
-static void mqtt5_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
+static void mqttEventHandler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
 {
     ESP_LOGD(TAG, "Event dispatched from event loop base=%s, event_id=%" PRIi32, base, event_id);
     esp_mqtt_event_handle_t event = event_data;
@@ -183,79 +184,58 @@ static void mqtt5_event_handler(void *handler_args, esp_event_base_t base, int32
 }
 
 
-static void mqtt5_app_start(void)
+static void mqttStart(const char *namespace)
 {
-    esp_mqtt5_connection_property_config_t connect_property = {
-        .session_expiry_interval = 10,
-        .maximum_packet_size = 1024,
-        .receive_maximum = 65535,
-        .topic_alias_maximum = 2,
-        .request_resp_info = true,
-        .request_problem_info = true,
-        .will_delay_interval = 10,
-        .payload_format_indicator = true,
-        .message_expiry_interval = 10,
-        .response_topic = "/test/response",
-        .correlation_data = "123456",
-        .correlation_data_len = 6,
-    };
+    char url[128] = {0};
+    char username[128] = {0};
+    char password[128] = {0};
+    char sVersion[4] = {0};
+    char sQOS[4] = {0};
+    char sRetain[4] = {0};
+    char lastwillTopic[128] = {0};
+    char lastwillMessage[128] = {0};
 
-    esp_mqtt_client_config_t mqtt5_cfg = {
-        .broker.address.uri = CONFIG_BROKER_URL,
-        .session.protocol_ver = MQTT_PROTOCOL_V_5,
-        .network.disable_auto_reconnect = true,
-        .credentials.username = "123",
-        .credentials.authentication.password = "456",
-        .session.last_will.topic = "/topic/will",
-        .session.last_will.msg = "i will leave",
-        .session.last_will.msg_len = 12,
-        .session.last_will.qos = 1,
-        .session.last_will.retain = true,
-    };
 
-#if CONFIG_BROKER_URL_FROM_STDIN
-    char line[128];
+    if (nvsLoad(namespace, "url", mqttConfig.broker.address.uri, sizeof mqttConfig.broker.address.uri) != ESP_OK)
+        ESP_LOGE(TAG, "url doesn\'t exist");
 
-    if (strcmp(mqtt5_cfg.uri, "FROM_STDIN") == 0) {
-        int count = 0;
-        printf("Please enter url of mqtt broker\n");
-        while (count < 128) {
-            int c = fgetc(stdin);
-            if (c == '\n') {
-                line[count] = '\0';
-                break;
-            } else if (c > 0 && c < 127) {
-                line[count] = c;
-                ++count;
-            }
-            vTaskDelay(10 / portTICK_PERIOD_MS);
-        }
-        mqtt5_cfg.broker.address.uri = line;
-        printf("Broker url: %s\n", line);
-    } else {
-        ESP_LOGE(TAG, "Configuration mismatch: wrong broker url");
-        abort();
-    }
-#endif /* CONFIG_BROKER_URL_FROM_STDIN */
+    if (nvsLoad(namespace, "username", mqttConfig.credentials.username, sizeof mqttConfig.credentials.username) != ESP_OK)
+        ESP_LOGE(TAG, "user name doesn\'t exist");
 
-    esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt5_cfg);
+    if (nvsLoad(namespace, "password", mqttConfig.credentials.authentication.password, sizeof mqttConfig.credentials.authentication.password) != ESP_OK)
+        ESP_LOGE(TAG, "password doesn\'t exist");
 
-    /* Set connection properties and user properties */
-    esp_mqtt5_client_set_user_property(&connect_property.user_property, user_property_arr, USE_PROPERTY_ARR_SIZE);
-    esp_mqtt5_client_set_user_property(&connect_property.will_user_property, user_property_arr, USE_PROPERTY_ARR_SIZE);
-    esp_mqtt5_client_set_connect_property(client, &connect_property);
+    if (nvsLoad(namespace, "version", sVersion, sizeof sVersion) != ESP_OK)
+        ESP_LOGE(TAG, "version doesn\'t exist");
+    else
+        mqttConfig.session.protocol_ver = atoi(sVersion);
 
-    /* If you call esp_mqtt5_client_set_user_property to set user properties, DO NOT forget to delete them.
-     * esp_mqtt5_client_set_connect_property will malloc buffer to store the user_property and you can delete it after
-     */
-    esp_mqtt5_client_delete_user_property(connect_property.user_property);
-    esp_mqtt5_client_delete_user_property(connect_property.will_user_property);
+    if (nvsLoad(namespace, "lastwillTopic", mqttConfig.session.last_will.topic, sizeof mqttConfig.session.last_will.topic) != ESP_OK)
+        ESP_LOGI(TAG, "lastwillTopic doesn\'t exist");
 
-    /* The last argument may be used to pass data to the event handler, in this example mqtt_event_handler */
-    esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt5_event_handler, NULL);
+    if (nvsLoad(namespace, "lastwillMessage", mqttConfig.session.last_will.msg, sizeof mqttConfig.session.last_will.msg) != ESP_OK)
+        ESP_LOGI(TAG, "lastwillMessage doesn\'t exist");
+    else
+        mqttConfig.session.last_will.msg_len = strlen(mqttConfig.session.last_will.msg);
+    
+    if (nvsLoad(namespace, "lastwillQOS", sQOS, sizeof sQOS) != ESP_OK)
+        ESP_LOGI(TAG, "lastwillQOS doesn\'t exist");
+    else
+        mqttConfig.session.last_will.qos = atoi(sQOS);
+        
+    if (nvsLoad(namespace, "lastwillRetain", sRetain, sizeof sRetain) != ESP_OK)
+        ESP_LOGI(TAG, "lastwillRetain doesn\'t exist");
+    else
+        mqttConfig.session.last_will.retain = atoi(sRetain) == 1 ? true:false;
+
+    mqttConfig.network.disable_auto_reconnect = false;
+
+    
+    client = esp_mqtt_client_init(&mqttConfig);
+    esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqttEventHandler, NULL);
     esp_mqtt_client_start(client);
+    
 }
-
 
 
 void app_main()
@@ -281,6 +261,6 @@ void app_main()
 
 	wifiStartSTA(wifiConfigSTA, 5*1000);
 
-    mqtt5_app_start();
+    mqttStart("mqttConfig");
 
 }

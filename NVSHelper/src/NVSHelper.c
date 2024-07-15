@@ -25,7 +25,8 @@ esp_err_t nvsSave (const char *namespace, const char *key, char const *value, si
 		return result;
 	}
 
-	result = nvs_set_blob(handler, key, value, length);
+	//result = nvs_set_blob(handler, key, value, length);
+	result = nvs_set_str(handler, key, value);
 	if (result != ESP_OK)
 	{
 		ESP_LOGE(TAG, "nvsSave error on blob %s.", esp_err_to_name(result));
