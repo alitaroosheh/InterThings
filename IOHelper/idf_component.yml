@@ -1,5 +1,9 @@
 dependencies:
   idf: '>=5.1'
+  Utilities:
+    path: Utilities
+    git: https://github.com/alitaroosheh/InterThings.git
+
 description: IOHelper helps to drive GPIO easily by means of ESP-IDF APIs
 repository: https://github.com/alitaroosheh/InterThings.git
 repository_info:

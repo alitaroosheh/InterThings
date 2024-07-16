@@ -120,7 +120,8 @@
 			"freertos.h": "c",
 			"nvshelper.h": "c",
 			"nvs_sec_provider.h": "c",
-			"cstdlib": "c"
+			"cstdlib": "c",
+			"utilities.h": "c"
 		}
 	}
 }

@@ -20,7 +20,6 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "esp_log.h"
-#include "driver/gpio.h"
 
 
 #define takeMutex(mtx) { \
