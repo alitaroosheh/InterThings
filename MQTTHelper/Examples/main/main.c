@@ -20,6 +20,10 @@
 
 #define TAG "MQTTHelper_example"
 
+#define configPartition       	"config_nvs"
+#define configNamespace			"config"
+
+
 static esp_mqtt_client_config_t mqttConfig;
 static esp_mqtt_client_handle_t client;
 
@@ -243,7 +247,7 @@ void app_main()
 
     ESP_LOGI(TAG, "MQTT helper application is running...\n");
 
-    ESP_ERROR_CHECK(nvs_flash_init());
+    ESP_ERROR_CHECK(nvsInit(configPartition, false));
     ESP_ERROR_CHECK(esp_netif_init());
 	wifiInit();
 

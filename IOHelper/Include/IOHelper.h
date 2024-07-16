@@ -21,27 +21,11 @@
 #include "freertos/queue.h"
 #include "esp_log.h"
 #include "driver/gpio.h"
+#include "Utilities.h"
 
 
 extern QueueHandle_t ioEventQueue;
 
-#define takeMutex(mtx) { \
-			if ( mtx == NULL) \
-				mtx = xSemaphoreCreateMutex(); \
-			if (!xSemaphoreTake(mtx, pdMS_TO_TICKS(portMAX_DELAY))) \
-			{ \
-				ESP_LOGE(TAG, "Could not take mutex"); \
-				return ESP_ERR_TIMEOUT; \
-			} \
-		}
-
-#define giveMutex(mtx) { \
-			if (!xSemaphoreGive(mtx)) \
-			{ \
-				ESP_LOGE(TAG, "Could not give mutex"); \
-				return ESP_FAIL; \
-			} \
-        }
 
 /**
  * @brief ioHoldCallBack will call when the press and hold event occured

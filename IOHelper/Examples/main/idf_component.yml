@@ -2,3 +2,9 @@ dependencies:
   # Define local dependency with relative path
   IOHelper:
     path: ../../
+    
+  Utilities:
+    path: Utilities
+    git: https://github.com/alitaroosheh/InterThings.git
+
+

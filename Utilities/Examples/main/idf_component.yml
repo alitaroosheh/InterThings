@@ -1,0 +1,4 @@
+dependencies:
+  # Define local dependency with relative path
+  Utilities:
+    path: ../../

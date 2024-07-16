@@ -1,0 +1,8 @@
+dependencies:
+  idf: '>=5.1'
+description: Utilities helps other libraries be generic
+repository: https://github.com/alitaroosheh/InterThings.git
+repository_info:
+  path: Utilities
+url: https://github.com/alitaroosheh/InterThings/tree/master/Utilities
+version: 1.0.0

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "Utilities Example",
+			"path": "Utilities/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}

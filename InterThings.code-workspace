@@ -49,6 +49,14 @@
 			"path": "MQTTHelper"
 		},
 		{
+			"name": "Utilities Example",
+			"path": "Utilities/Examples"
+		},
+		{
+			"name": "Utilities",
+			"path": "Utilities"
+		},
+		{
 
 			"path": "."
 		}
@@ -111,7 +119,8 @@
 			"iohelper.h": "c",
 			"freertos.h": "c",
 			"nvshelper.h": "c",
-			"nvs_sec_provider.h": "c"
+			"nvs_sec_provider.h": "c",
+			"cstdlib": "c"
 		}
 	}
 }
