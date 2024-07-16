@@ -1,3 +1,13 @@
+/**
+ * @file main.c
+ * @author Ali Taroosheh (ali.taroosheh@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2024-07-16
+ * 
+ * 
+ */
+
 #include <stdio.h>
 #include "NVSHelper.h"
 #include "esp_log.h"
@@ -8,68 +18,31 @@
 
 #define TAG "NVSHelper_example"
 
+#define lable "config_nvs"
+
 void app_main()
 {
 
-	esp_err_t err = nvs_flash_init();
-	if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-		ESP_ERROR_CHECK( nvs_flash_erase() );
-		err = nvs_flash_init();
-	}
-	ESP_ERROR_CHECK(err);
+	nvsInit(lable, false);
+	
 
-	char value1[100] = {};
-	size_t length1 = sizeof(value1);
-	char value2[100] = {};
-	size_t length2 = sizeof(value2);
+	char value[25] = {0};
+	size_t length = sizeof(value);
 
 
-	err = nvsLoad("namespace", "Key1", value1, &length1);
+
+	esp_err_t err = nvsLoad(lable, "namespace", "Key", value, &length);
 	if(err == ESP_OK)
 	{
-		ESP_LOGW(TAG, "***namespace Key1 is exist and this is the value:%s and length: %zu", value1, length1);
+		ESP_LOGI(TAG, "***namespace Key is exist and this is the value:%s and length: %zu", value, length);
 	}
 	else
 	{
 		ESP_LOGW(TAG, "***namespace error %d", err);
+		strcpy(value, "0");
 	}
-	err = nvsLoad("namespace", "Key2", value2, &length2);
-	if(err == ESP_OK)
-	{
-		ESP_LOGW(TAG, "***namespace Key2 is exist and this is the value:%s and length: %zu", value2, length2);
-	}
-	else
-	{
-		ESP_LOGW(TAG, "***namespace error %d", err);
-	}
-
-
-
-	if(nvsLoad("namespace", "Key1", value1, &length1) == ESP_OK)
-	{
-		ESP_LOGI(TAG, "namespace Key1 is exist and this is the value:%s and length: %zu", value1, length1);
-	}
-	else
-	{
-		strcpy(value1, "this is the key1 value");
-		if(nvsSave("namespace", "Key1", value1, sizeof(value1)) == ESP_OK)
-		{
-			ESP_LOGI(TAG, "namespace Key1 is saved successfuly on NVS");
-		}
-	}
-
-	if(nvsLoad("namespace", "Key2", value2, &length2) == ESP_OK)
-	{
-		ESP_LOGI(TAG, "namespace Key2 is exist and this is the value:%s and length: %zu", value2, length2);
-		//nvsDeleteKey("namespace", "Key2");
-	}
-	else
-	{
-		strcpy(value2, "this is the Key2 value");
-		if(nvsSave("namespace", "Key2", value2, sizeof(value2)) == ESP_OK)
-		{
-			ESP_LOGI(TAG, "Key2 does not exist, therefore namespace Key2 is saved successfuly on NVS");
-		}
-	}
-
+	int incr = atoi(value) + 1;
+	sprintf(value, "%d", incr);
+	ESP_LOGW(TAG, "writing value %d", incr);
+	err = nvsSave(lable, "namespace", "Key", value, length);
 }

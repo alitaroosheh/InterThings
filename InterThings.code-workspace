@@ -109,7 +109,9 @@
 			"algorithm": "c",
 			"iterator": "c",
 			"iohelper.h": "c",
-			"freertos.h": "c"
+			"freertos.h": "c",
+			"nvshelper.h": "c",
+			"nvs_sec_provider.h": "c"
 		}
 	}
 }
