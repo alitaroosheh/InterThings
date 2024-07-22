@@ -21,6 +21,8 @@
 
 static const char *TAG = "I2CHelper";
 
+static SemaphoreHandle_t i2c_mutex; 
+
 
 static struct {
     i2c_port_t      port;
@@ -34,12 +36,17 @@ static struct {
 /// @param frequency 
 /// @param sda 
 /// @param scl 
-void i2cConfig(i2c_port_t port, uint32_t frequency, uint8_t sda, uint8_t scl)
+/// @return esp_err_t
+esp_err_t i2cConfig(i2c_port_t port, uint32_t frequency, uint8_t sda, uint8_t scl)
 {
+
+	takeMutex(i2c_mutex);
     config.port = port;
     config.freq = frequency;
     config.sda = sda;
     config.scl = scl;
+	giveMutex(i2c_mutex);
+    return ESP_OK;
 }
 
 /// @brief i2cMasterDriverInitialize static function to configure the I2C bus in master mode
@@ -47,6 +54,8 @@ void i2cConfig(i2c_port_t port, uint32_t frequency, uint8_t sda, uint8_t scl)
 /// @return esp_err_t
 static esp_err_t i2cMasterDriverInitialize(void)
 {
+
+	takeMutex(i2c_mutex);
     i2c_config_t conf = {
         .mode = I2C_MODE_MASTER,
         .sda_io_num = config.sda,
@@ -55,7 +64,10 @@ static esp_err_t i2cMasterDriverInitialize(void)
         .scl_pullup_en = GPIO_PULLUP_ENABLE,
         .master.clk_speed = config.freq,
     };
-    return i2c_param_config(config.port, &conf);
+    esp_err_t ret = i2c_param_config(config.port, &conf);
+	giveMutex(i2c_mutex);
+    return ret;
+
 }
 
 /// @brief i2cGet to get data from I2C bus
@@ -67,6 +79,7 @@ static esp_err_t i2cMasterDriverInitialize(void)
 esp_err_t i2cGet(uint8_t chip_address, uint8_t register_address, uint8_t *data, uint32_t data_length)
 {
 
+	takeMutex(i2c_mutex);
     i2c_driver_install(config.port, I2C_MODE_MASTER, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
     i2cMasterDriverInitialize();
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -96,8 +109,10 @@ esp_err_t i2cGet(uint8_t chip_address, uint8_t register_address, uint8_t *data, 
     {
         ESP_LOGW(TAG, "Read failed");
     }
-    i2c_driver_delete(config.port);
+    ret = i2c_driver_delete(config.port);
+	giveMutex(i2c_mutex);
     return ret;
+
 }
 /// @brief i2cSend send data over I2C bus
 /// @param chip_address 
@@ -108,6 +123,7 @@ esp_err_t i2cGet(uint8_t chip_address, uint8_t register_address, uint8_t *data, 
 esp_err_t i2cSend (uint8_t chip_address, uint8_t register_address, const uint8_t *data, uint32_t data_length)
 {
 
+	takeMutex(i2c_mutex);
     i2c_driver_install(config.port, I2C_MODE_MASTER, I2C_MASTER_RX_BUF_DISABLE, I2C_MASTER_TX_BUF_DISABLE, 0);
     i2cMasterDriverInitialize();
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
@@ -132,6 +148,8 @@ esp_err_t i2cSend (uint8_t chip_address, uint8_t register_address, const uint8_t
     {
         ESP_LOGW(TAG, "Write Failed");
     }
-    i2c_driver_delete(config.port);
+    ret = i2c_driver_delete(config.port);
+	giveMutex(i2c_mutex);
     return ret;
+
 }

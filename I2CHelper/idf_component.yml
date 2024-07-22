@@ -1,6 +1,10 @@
 dependencies:
   idf:
     version: '>=5.1'
+  Utilities:
+    path: Utilities
+    git: https://github.com/alitaroosheh/InterThings.git
+    
 description: I2CHelper helps to drive I2C easily by means of ESP-IDF APIs
 repository: https://github.com/alitaroosheh/InterThings.git
 repository_info:
