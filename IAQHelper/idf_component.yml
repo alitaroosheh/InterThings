@@ -2,6 +2,9 @@ dependencies:
   I2CHelper:   
     path: I2CHelper
     git: https://github.com/alitaroosheh/InterThings.git
+  Utilities:
+    path: Utilities
+    git: https://github.com/alitaroosheh/InterThings.git
   idf:
     version: '>=5.1'
 description: IAQHelper helps to drive BME680 easily by means of I2C

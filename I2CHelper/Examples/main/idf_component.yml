@@ -2,3 +2,7 @@ dependencies:
   # Define local dependency with relative path
   I2CHelper:
     path: ../../
+
+  Utilities:
+    path: Utilities
+    git: https://github.com/alitaroosheh/InterThings.git
