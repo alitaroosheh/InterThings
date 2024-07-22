@@ -200,34 +200,34 @@ static void mqttStart(const char *namespace)
     char lastwillMessage[128] = {0};
 
 
-    if (nvsLoad(namespace, "url", mqttConfig.broker.address.uri, sizeof mqttConfig.broker.address.uri) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "url", mqttConfig.broker.address.uri, sizeof mqttConfig.broker.address.uri) != ESP_OK)
         ESP_LOGE(TAG, "url doesn\'t exist");
 
-    if (nvsLoad(namespace, "username", mqttConfig.credentials.username, sizeof mqttConfig.credentials.username) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "username", mqttConfig.credentials.username, sizeof mqttConfig.credentials.username) != ESP_OK)
         ESP_LOGE(TAG, "user name doesn\'t exist");
 
-    if (nvsLoad(namespace, "password", mqttConfig.credentials.authentication.password, sizeof mqttConfig.credentials.authentication.password) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "password", mqttConfig.credentials.authentication.password, sizeof mqttConfig.credentials.authentication.password) != ESP_OK)
         ESP_LOGE(TAG, "password doesn\'t exist");
 
-    if (nvsLoad(namespace, "version", sVersion, sizeof sVersion) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "version", sVersion, sizeof sVersion) != ESP_OK)
         ESP_LOGE(TAG, "version doesn\'t exist");
     else
         mqttConfig.session.protocol_ver = atoi(sVersion);
 
-    if (nvsLoad(namespace, "lastwillTopic", mqttConfig.session.last_will.topic, sizeof mqttConfig.session.last_will.topic) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "lastwillTopic", mqttConfig.session.last_will.topic, sizeof mqttConfig.session.last_will.topic) != ESP_OK)
         ESP_LOGI(TAG, "lastwillTopic doesn\'t exist");
 
-    if (nvsLoad(namespace, "lastwillMessage", mqttConfig.session.last_will.msg, sizeof mqttConfig.session.last_will.msg) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "lastwillMessage", mqttConfig.session.last_will.msg, sizeof mqttConfig.session.last_will.msg) != ESP_OK)
         ESP_LOGI(TAG, "lastwillMessage doesn\'t exist");
     else
         mqttConfig.session.last_will.msg_len = strlen(mqttConfig.session.last_will.msg);
     
-    if (nvsLoad(namespace, "lastwillQOS", sQOS, sizeof sQOS) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "lastwillQOS", sQOS, sizeof sQOS) != ESP_OK)
         ESP_LOGI(TAG, "lastwillQOS doesn\'t exist");
     else
         mqttConfig.session.last_will.qos = atoi(sQOS);
         
-    if (nvsLoad(namespace, "lastwillRetain", sRetain, sizeof sRetain) != ESP_OK)
+    if (nvsLoad(configPartition, namespace, "lastwillRetain", sRetain, sizeof sRetain) != ESP_OK)
         ESP_LOGI(TAG, "lastwillRetain doesn\'t exist");
     else
         mqttConfig.session.last_will.retain = atoi(sRetain) == 1 ? true:false;
