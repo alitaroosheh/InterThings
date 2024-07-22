@@ -1,6 +1,5 @@
 dependencies:
-  idf:
-    version: '>=5.1'
+  idf: '>=5.1'
   Utilities:
     path: Utilities
     git: https://github.com/alitaroosheh/InterThings.git
