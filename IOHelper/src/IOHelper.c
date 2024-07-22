@@ -13,7 +13,7 @@
 #define TAG "IOHelper"
 #define ESP_INTR_FLAG_DEFAULT 0
 
-SemaphoreHandle_t io_mutex;
+static SemaphoreHandle_t io_mutex;
 QueueHandle_t ioEventQueue = NULL;
 TaskHandle_t holdTaskHandle = NULL;
 
