@@ -39,3 +39,46 @@
 				return ESP_FAIL; \
 			} \
         }
+
+
+
+#define jsonGetString(root,key,output) { \
+    if(!cJSON_GetObjectItem(root, key)) \
+    { \
+        ESP_LOGE(TAG, "jsonGetString %s not exist.", key); \
+        return ESP_ERR_NOT_FOUND; \
+    } \
+    else \
+    { \
+        strcpy((char *)output, cJSON_GetObjectItem(root, key)->valuestring); \
+        ESP_LOGI(TAG, "key: %s", output); \
+    } \
+}
+
+
+#define jsonGetInt(root,key,output) { \
+    if(!cJSON_GetObjectItem(root, key)) \
+    { \
+        ESP_LOGE(TAG, "jsonGetInt %s not exist.", key); \
+        return ESP_ERR_NOT_FOUND; \
+    } \
+    else \
+    { \
+        *output = cJSON_GetObjectItem(root, key)->valueint; \
+        ESP_LOGI(TAG, "key: %"PRId32 "", (uint32_t)output); \
+    } \
+}
+
+
+#define jsonGetDouble(root,key,output) { \
+    if(!cJSON_GetObjectItem(root, key)) \
+    { \
+        ESP_LOGE(TAG, "jsonGetDouble %s not exist.", key); \
+        return ESP_ERR_NOT_FOUND; \
+    } \
+    else \
+    { \
+        *output = cJSON_GetObjectItem(root, key)->valuedouble; \
+        ESP_LOGI(TAG, "key: %f", (double)output); \
+    } \
+}
