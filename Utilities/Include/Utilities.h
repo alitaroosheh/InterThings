@@ -20,6 +20,7 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "esp_log.h"
+#include "cJSON.h"
 
 
 #define takeMutex(mtx) { \
@@ -82,3 +83,6 @@
         ESP_LOGI(TAG, "key: %f", (double)output); \
     } \
 }
+
+
+
