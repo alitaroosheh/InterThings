@@ -1,0 +1,9 @@
+dependencies:
+  idf:
+    version: '>=5.1'
+description: OTAHelper helps to drive OTA easily by means of ESP-IDF APIs
+repository: https://github.com/alitaroosheh/InterThings.git
+repository_info:
+  path: OTAHelper
+url: https://github.com/alitaroosheh/InterThings/tree/master/OTAHelper
+version: 1.0.0

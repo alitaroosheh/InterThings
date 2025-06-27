@@ -57,6 +57,14 @@
 			"path": "Utilities"
 		},
 		{
+			"name": "OTA Example",
+			"path": "OTAHelper/Examples"
+		},
+		{
+			"name": "OTAHelper",
+			"path": "OTAHelper"
+		},
+		{
 
 			"path": "."
 		}
@@ -121,7 +129,8 @@
 			"nvshelper.h": "c",
 			"nvs_sec_provider.h": "c",
 			"cstdlib": "c",
-			"utilities.h": "c"
+			"utilities.h": "c",
+			"stdio.h": "c"
 		}
 	}
 }

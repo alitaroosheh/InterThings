@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "OTAHelper Example",
+			"path": "OTAHelper/Examples"
+		},
+		{
+
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdint": "c"
+		}
+	}
+}

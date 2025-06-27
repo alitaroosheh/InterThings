@@ -1,0 +1,10 @@
+dependencies:
+  # Define local dependency with relative path
+  OTAHelper:
+    path: ../../
+  NVSHelper:
+    path: NVSHelper
+    git: https://github.com/alitaroosheh/InterThings.git
+  WiFiHelper:
+    path: WiFiHelper
+    git: https://github.com/alitaroosheh/InterThings.git
